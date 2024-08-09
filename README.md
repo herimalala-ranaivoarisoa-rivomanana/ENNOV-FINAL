@@ -7,13 +7,16 @@ This project is a full-stack web application for managing products and users, bu
 - Docker
 - Docker Compose
 - Node.js
-- npm
 
 ## Installation
 
-### Backend Setup
+Clone the repository:
 
-Clone the repository
+  ```bash
+  git clone git@github.com:herimalala-ranaivoarisoa-rivomanana/ENNOV-FINAL.git
+  ```
+
+### Backend Setup
 
 1. Navigate to the backend directory:
 
@@ -21,34 +24,32 @@ Clone the repository
    cd backend
    ```
 
-2. Create a single Docker Compose file located at the root of the project to manage the backend services.
-
-3. Start the backend services:
+2. Start the backend services:
 
    ```bash
    docker-compose up -d
    ```
 
-4. Install backend dependencies:
+3. Install backend dependencies:
 
    ```bash
    npm install
    ```
 
-5. Run database migrations and seed the database:
+4. Run database migrations and seed the database:
 
    ```bash
    npx prisma migrate dev
    npx prisma db seed
    ```
 
-6. Start the backend in development mode:
+5. Start the backend in development mode:
 
    ```bash
    npm run start:dev
    ```
 
-7. Access the API documentation via Swagger at: [http://localhost:4000/api](http://localhost:4000/api)
+6. Access the API documentation via Swagger at: [http://localhost:4000/api](http://localhost:4000/api)
 
 ### Frontend Setup
 
@@ -75,7 +76,7 @@ Clone the repository
 To test the application, use the following credentials:
 
 - **Username:** <reviewer@ennov.io>
-- **Password:** reviewerpassword@ennov.io-test
+- **Password:** <reviewerpassword@ennov.io-test>
 
 These credentials can be used to log in to the application and access features.
 
