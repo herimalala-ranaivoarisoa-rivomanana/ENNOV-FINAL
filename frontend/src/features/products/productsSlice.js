@@ -32,8 +32,12 @@ export const updateProduct = createAsyncThunk('products/update', async ({ id, pr
 
 // Delete a product
 export const deleteProduct = createAsyncThunk('products/delete', async (id) => {
-  await api.delete(`/products/${id}`);
-  return id; // Return the id of the deleted product
+  const response = await api.delete(`/products/${id}`);
+  if (response.status === 204) {
+    return id;
+  } else {
+    throw new Error('Failed to delete product');
+  }
 });
 
 const productsSlice = createSlice({
@@ -83,9 +87,18 @@ const productsSlice = createSlice({
           item.id === updatedProduct.id ? updatedProduct : item
         );
       })
+      .addCase(deleteProduct.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
       .addCase(deleteProduct.fulfilled, (state, action) => {
+        state.loading = false;
         const deletedId = action.payload;
         state.items = state.items.filter((product) => product.id !== deletedId);
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       });
   },
 });

@@ -1,8 +1,13 @@
-# Product Management Application
+# Application de Gestion de Produits
 
-This project is a full-stack web application for managing products and users, built with a NestJS backend and a React frontend. It features a RESTful API with authentication and authorization mechanisms, utilizing JWT tokens. The frontend is styled with Material-UI and employs React Router for navigation.
+Ce projet est une application web full-stack pour la gestion des produits, construite avec un backend NestJS et un frontend React. Elle dispose d'une API RESTful avec des mécanismes d'authentification et d'autorisation, utilisant des tokens JWT. Le frontend est stylisé avec Material-UI et utilise React Router pour la navigation.
 
-## Prerequisites
+Les informations d'identification suivantes sont volontairement partagées pour vous permettre de tester :
+
+- **Nom d'utilisateur :** <reviewer@ennov.io>
+- **Mot de passe :** <reviewerpassword@ennov.io-test>
+
+## Prérequis
 
 - Docker
 - Docker Compose
@@ -10,89 +15,80 @@ This project is a full-stack web application for managing products and users, bu
 
 ## Installation
 
-Clone the repository:
+Clonez le dépôt :
 
-  ```bash
-  git clone git@github.com:herimalala-ranaivoarisoa-rivomanana/ENNOV-FINAL.git
-  ```
+```bash
+git clone git@github.com:herimalala-ranaivoarisoa-rivomanana/ENNOV-FINAL.git
+```
 
-### Backend Setup
+### Configuration du Backend
 
-1. Navigate to the backend directory:
+1. Accédez au répertoire backend :
 
    ```bash
    cd backend
    ```
 
-2. Start the backend services:
+2. Démarrez les services backend :
 
    ```bash
    docker-compose up -d
    ```
 
-3. Install backend dependencies:
+3. Installez les dépendances du backend :
 
    ```bash
    npm install
    ```
 
-4. Run database migrations and seed the database:
+4. Exécutez les migrations de la base de données et remplissez la base de données :
 
    ```bash
    npx prisma migrate dev
    npx prisma db seed
    ```
 
-5. Start the backend in development mode:
+5. Démarrez le backend en mode développement :
 
    ```bash
    npm run start:dev
    ```
 
-6. Access the API documentation via Swagger at: [http://localhost:4000/api](http://localhost:4000/api)
+6. Accédez à la documentation de l'API via Swagger à : [http://localhost:4000/api](http://localhost:4000/api)
 
-### Frontend Setup
+### Configuration du Frontend
 
-1. From Project root navigate to the frontend directory:
+1. Depuis le répertoire racine du projet, accédez au répertoire frontend :
 
    ```bash
    cd frontend
    ```
 
-2. Install frontend dependencies:
+2. Installez les dépendances du frontend :
 
    ```bash
    npm install
    ```
 
-3. Start the React application:
+3. Démarrez l'application React :
 
    ```bash
    npm start
    ```
 
-## Credentials
+## Fonctionnalités
 
-To test the application, use the following credentials:
+- **Backend :**
+  - Développement d'une API RESTful utilisant NestJS.
+  - Authentification et autorisation avec des tokens JWT.
+  - Gestion des erreurs et validation suivant les principes RESTful.
 
-- **Username:** <reviewer@ennov.io>
-- **Password:** <reviewerpassword@ennov.io-test>
+- **Frontend :**
+  - Application React stylisée avec Material-UI.
+  - Navigation utilisant React Router.
+  - Gestion de l'état avec Redux Toolkit, y compris des sélecteurs pour une récupération efficace des données.
+  - Validation des formulaires et gestion des erreurs.
 
-These credentials can be used to log in to the application and access features.
+## Licence
 
-## Features
-
-- **Backend:**
-  - RESTful API development using NestJS.
-  - Authentication and authorization with JWT tokens.
-  - Error handling and validation following RESTful principles.
-
-- **Frontend:**
-  - React application styled with Material-UI.
-  - Navigation using React Router.
-  - State management with Redux Toolkit, including selectors for efficient data retrieval.
-  - Form validation and error handling.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.

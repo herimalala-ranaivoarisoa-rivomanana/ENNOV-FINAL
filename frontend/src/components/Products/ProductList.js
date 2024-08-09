@@ -68,6 +68,7 @@ const ProductList = () => {
           setSnackbarMessage('Erreur lors de la suppression du produit.');
           setSnackbarOpen(true);
         });
+        if(filteredProducts.length===1) setFilteredProducts([])
     }
   };
 
@@ -173,9 +174,9 @@ const ProductList = () => {
                   key={product.id} 
                   sx={{
                     backgroundColor: index % 2 === 0 ? '#f9f9f9' : 'white',
-                    '&:hover': { backgroundColor: '#f5f5f5', cursor: 'pointer' }, // Ajoutez un curseur pointeur
+                    '&:hover': { backgroundColor: '#f5f5f5', cursor: 'pointer' },
                   }}
-                  onClick={() => navigate(`/products/${product.id}`)} // Redirection vers la page de détails
+                  onClick={() => navigate(`/products/${product.id}`)}
                 >
                   <TableCell align="center">
                     <Typography variant="body1" color="textPrimary">
@@ -206,7 +207,7 @@ const ProductList = () => {
                       <Button 
                         variant="outlined" 
                         color="error" 
-                        onClick={(e) => { // Empêcher la propagation du clic pour la suppression
+                        onClick={(e) => {
                           e.stopPropagation();
                           handleDelete(product.id);
                         }}

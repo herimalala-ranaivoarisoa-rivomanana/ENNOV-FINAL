@@ -6,11 +6,11 @@ const ErrorPage = () => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    navigate(-1); // Go back to the previous page
+    navigate(-1);
   };
 
   const handleGoHome = () => {
-    navigate('/'); // Go to the home page
+    navigate('/');
   };
 
   return (

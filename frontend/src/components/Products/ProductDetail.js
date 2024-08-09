@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 const ProductDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Hook pour naviguer
+  const navigate = useNavigate(); 
   const product = useSelector((state) => selectProductById(state, id));
   const loading = useSelector((state) => state.products.loading);
   const error = useSelector((state) => state.products.error);
@@ -61,9 +61,9 @@ const ProductDetail = () => {
           </Typography>
           <Box display="flex" justifyContent="space-between" mt={2}>
             <Button
-              onClick={() => navigate(-1)} // Retour à la page précédente
+              onClick={() => navigate(-1)} 
               variant="outlined"
-              color="secondary" // Couleur différente pour le bouton Retour
+              color="secondary" 
               sx={{
                 marginRight: 1,
                 '&:hover': {

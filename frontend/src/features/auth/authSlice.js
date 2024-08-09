@@ -13,8 +13,8 @@ export const login = createAsyncThunk('auth/login', async (credentials, { reject
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: null,
-    token: localStorage.getItem('token') || null,
+    user: JSON.parse(localStorage.getItem('ennov_test_user')) || null,
+    token: localStorage.getItem('ennov_test_token') || null,
     loading: false,
     error: null,
   },
@@ -22,13 +22,19 @@ const authSlice = createSlice({
     logout(state) {
       state.user = null;
       state.token = null;
-      localStorage.removeItem('token');
+      localStorage.removeItem('ennov_test_token');
       state.error = null; 
     },
-    loadUserFromToken(state) {
-      const token = localStorage.getItem('token');
+    loadToken(state) {
+      const token = localStorage.getItem('ennov_test_token');
       if (token) {
         state.token = token;
+      }
+    },
+    loadUser(state) {
+      const user = JSON.parse(localStorage.getItem('ennov_test_user')) ;
+      if (user) {
+        state.user = user;
       }
     },
   },
@@ -42,7 +48,8 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload.user;
         state.token = action.payload.accessToken;
-        localStorage.setItem('token', action.payload.accessToken); 
+        localStorage.setItem('ennov_test_token', action.payload.accessToken); 
+        localStorage.setItem('ennov_test_user', JSON.stringify(action.payload.user)); 
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
@@ -52,7 +59,7 @@ const authSlice = createSlice({
 });
 
 // Exporting actions
-export const { logout, loadUserFromToken } = authSlice.actions;
+export const { logout, loadToken } = authSlice.actions;
 
 // Selectors
 export const selectIsAuthenticated = (state) => !!state.auth.token;

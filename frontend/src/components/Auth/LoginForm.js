@@ -10,7 +10,7 @@ const LoginForm = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const user = useSelector(selectAuthUser);
   const authError = useSelector(selectAuthError);
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate();
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

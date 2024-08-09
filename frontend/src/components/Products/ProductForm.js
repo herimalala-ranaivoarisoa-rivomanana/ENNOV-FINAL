@@ -41,7 +41,6 @@ const ProductForm = () => {
     dispatch(fetchProduct());
   };
   
-    // Handle cancel action
     const handleCancel = () => {
       dispatch(fetchProduct());
       navigate(-1);
@@ -83,7 +82,7 @@ const ProductForm = () => {
           fullWidth
           margin="normal"
           required
-          inputProps={{ min: 0 }} // Prevent negative values
+          inputProps={{ min: 0 }}
         />
         <TextField
           label="Description"

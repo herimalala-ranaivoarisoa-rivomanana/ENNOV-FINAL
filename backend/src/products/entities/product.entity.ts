@@ -2,7 +2,6 @@ import { Product } from '@prisma/client';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class ProductEntity implements Product {
-  published: boolean;
   @ApiProperty()
   id: number;
 
