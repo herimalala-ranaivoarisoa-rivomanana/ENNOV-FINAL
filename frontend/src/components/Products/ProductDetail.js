@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../features/products/productsSlice';
 import { selectProductById } from '../../features/products/productsSelectors';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   Typography,
   Button,
@@ -16,7 +16,8 @@ import { Link } from 'react-router-dom';
 const ProductDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const product = useSelector(selectProductById);
+  const navigate = useNavigate(); // Hook pour naviguer
+  const product = useSelector((state) => selectProductById(state, id));
   const loading = useSelector((state) => state.products.loading);
   const error = useSelector((state) => state.products.error);
 
@@ -36,7 +37,7 @@ const ProductDetail = () => {
     );
   }
 
-  if (!product) return <Typography variant="body1">Aucun produit trouvé.</Typography>;
+  if (!product) return <Typography variant="body1" align="center">Aucun produit trouvé.</Typography>;
 
   return (
     <Grid container justifyContent="center">
@@ -58,13 +59,25 @@ const ProductDetail = () => {
           <Typography variant="body1" sx={{ margin: '20px 0' }}>
             {product.description}
           </Typography>
-          <Box display="flex" justifyContent="center">
+          <Box display="flex" justifyContent="space-between" mt={2}>
+            <Button
+              onClick={() => navigate(-1)} // Retour à la page précédente
+              variant="outlined"
+              color="secondary" // Couleur différente pour le bouton Retour
+              sx={{
+                marginRight: 1,
+                '&:hover': {
+                  backgroundColor: (theme) => theme.palette.secondary.light,
+                },
+              }}
+            >
+              Retour
+            </Button>
             <Button
               component={Link}
               to={`/products/edit/${product.id}`}
               variant="contained"
               sx={{
-                marginTop: 2,
                 backgroundColor: (theme) => theme.palette.primary.main,
                 color: (theme) => theme.palette.common.white,
                 '&:hover': {
