@@ -61,11 +61,11 @@ const ProductList = () => {
       dispatch(deleteProduct(productId))
         .unwrap()
         .then(() => {
-          setSnackbarMessage('Product deleted successfully.');
+          setSnackbarMessage('Produit supprimé avec succès.');
           setSnackbarOpen(true);
         })
         .catch(() => {
-          setSnackbarMessage('Error deleting product.');
+          setSnackbarMessage('Erreur lors de la suppression du produit.');
           setSnackbarOpen(true);
         });
     }
@@ -173,9 +173,9 @@ const ProductList = () => {
                   key={product.id} 
                   sx={{
                     backgroundColor: index % 2 === 0 ? '#f9f9f9' : 'white',
-                    '&:hover': { backgroundColor: '#f5f5f5' },
-                    textDecoration: 'none',
+                    '&:hover': { backgroundColor: '#f5f5f5', cursor: 'pointer' }, // Ajoutez un curseur pointeur
                   }}
+                  onClick={() => navigate(`/products/${product.id}`)} // Redirection vers la page de détails
                 >
                   <TableCell align="center">
                     <Typography variant="body1" color="textPrimary">
@@ -184,7 +184,7 @@ const ProductList = () => {
                   </TableCell>
                   <TableCell align="center">
                     <Typography variant="body1" color="textPrimary">
-                      ${product.price}
+                      ${product.price ? product.price.toFixed(2) : 'N/A'}
                     </Typography>
                   </TableCell>
                   <TableCell align="center">
@@ -201,14 +201,17 @@ const ProductList = () => {
                         to={`/products/edit/${product.id}`} 
                         sx={{ marginRight: 1 }}
                       >
-                        Edit
+                        Modifier
                       </Button>
                       <Button 
                         variant="outlined" 
                         color="error" 
-                        onClick={() => handleDelete(product.id)}
+                        onClick={(e) => { // Empêcher la propagation du clic pour la suppression
+                          e.stopPropagation();
+                          handleDelete(product.id);
+                        }}
                       >
-                        Delete
+                        Supprimer
                       </Button>
                     </div>
                   </TableCell>
