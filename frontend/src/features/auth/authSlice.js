@@ -4,7 +4,7 @@ import api from '../../services/api';
 export const login = createAsyncThunk('auth/login', async (credentials, { rejectWithValue }) => {
   try {
     const response = await api.post('/auth/login', credentials);
-    return response.data; 
+    return response.data;
   } catch (error) {
     return rejectWithValue(error.response.data);
   }
@@ -16,14 +16,14 @@ const authSlice = createSlice({
     user: null,
     token: localStorage.getItem('token') || null,
     loading: false,
-    error: null, // This will hold the error message
+    error: null,
   },
   reducers: {
     logout(state) {
       state.user = null;
       state.token = null;
       localStorage.removeItem('token');
-      state.error = null; // Clear error on logout
+      state.error = null; 
     },
     loadUserFromToken(state) {
       const token = localStorage.getItem('token');
@@ -36,7 +36,7 @@ const authSlice = createSlice({
     builder
       .addCase(login.pending, (state) => {
         state.loading = true;
-        state.error = null; // Clear error on new login attempt
+        state.error = null; 
       })
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
@@ -46,7 +46,7 @@ const authSlice = createSlice({
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload; // Store the error message
+        state.error = action.payload; 
       });
   },
 });
@@ -56,8 +56,8 @@ export const { logout, loadUserFromToken } = authSlice.actions;
 
 // Selectors
 export const selectIsAuthenticated = (state) => !!state.auth.token;
-export const selectAuthToken = (state) => state.auth.token;
-export const selectAuthUser = (state) => state.auth.user;
-export const selectAuthError = (state) => state.auth.error; // Add this line for error selector
+export const selectAuthToken = (state) => state?.auth?.token;
+export const selectAuthUser = (state) => state?.auth?.user;
+export const selectAuthError = (state) => state?.auth?.error; 
 
 export default authSlice.reducer;

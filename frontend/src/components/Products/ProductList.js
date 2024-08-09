@@ -16,16 +16,18 @@ import {
   Snackbar, 
   IconButton, 
   TextField, 
-  TablePagination
+  TablePagination,
+  Grid
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ProductList = () => {
   const dispatch = useDispatch();
   const products = useSelector(selectAllProducts);
   const loading = useSelector(selectProductsLoading);
   const error = useSelector(selectProductsError);
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -48,6 +50,10 @@ const ProductList = () => {
       );
     }
   }, [products, searchQuery]);
+
+  const handleCreateProduct = () => {
+    navigate('/products/create');
+  };
 
   const handleDelete = (productId) => {
     const confirmDelete = window.confirm("Etes-vous sûr de vouloir supprimer ce produit?");
@@ -90,16 +96,35 @@ const ProductList = () => {
 
   return (
     <>
-      <Paper sx={{ padding: 2, marginBottom: 2 }}>
-        <TextField
-          label="Rechercher un produit"
-          variant="outlined"
-          fullWidth
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          sx={{ marginBottom: 2 }}
-        />
-      </Paper>
+      <Grid container mb={2}>
+        <Grid item xs={8}>
+          <TextField
+            label="Rechercher un produit"
+            variant="outlined"
+            fullWidth
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </Grid>
+        <Grid 
+          item 
+          xs={4} 
+          sx={{ 
+            display: 'flex', 
+            flexDirection: 'row', 
+            justifyContent: 'flex-end' 
+          }}
+        >
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleCreateProduct}
+            sx={{ margin: '10px 0 10px 0' }}
+          >
+            Ajouter
+          </Button>
+        </Grid>
+      </Grid>
 
       {loading ? (
         <Paper sx={{ padding: 2, textAlign: 'center' }}>
@@ -119,24 +144,24 @@ const ProductList = () => {
         <TableContainer component={Paper} sx={{ width: '100%', margin: 'auto' }}>
           <Table sx={{ minWidth: 600, width: '100%' }} aria-label="product table">
             <TableHead>
-              <TableRow>
+              <TableRow bgcolor="#bdbdbd">
                 <TableCell align="center" sx={{ width: '30%' }}>
-                  <Typography variant="h6" component="div" color="textPrimary">
+                  <Typography variant="h6" component="div" color="textPrimary" >
                     Nom
                   </Typography>
                 </TableCell>
                 <TableCell align="center" sx={{ width: '30%' }}>
-                  <Typography variant="h6" component="div" color="textPrimary">
+                  <Typography variant="h6" component="div" color="textPrimary" >
                     Prix
                   </Typography>
                 </TableCell>
                 <TableCell align="center" sx={{ width: '30%' }}>
-                  <Typography variant="h6" component="div" color="textPrimary">
+                  <Typography variant="h6" component="div" color="textPrimary" >
                     Description
                   </Typography>
                 </TableCell>
                 <TableCell align="center" sx={{ width: '10%' }}>
-                  <Typography variant="h6" component="div" color="textPrimary">
+                  <Typography variant="h6" component="div" color="textPrimary" >
                     Actions
                   </Typography>
                 </TableCell>

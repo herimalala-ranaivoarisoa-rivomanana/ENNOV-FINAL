@@ -3,7 +3,7 @@
 /backend/node_modules
 /backend/build
 
-/frontend/node_modules
+/node_modules
 
 # Logs
 logs
